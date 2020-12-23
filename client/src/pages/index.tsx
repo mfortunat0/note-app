@@ -17,7 +17,18 @@ export default function Home() {
   const textAreaRef = useRef<HTMLInputElement>(null);
   const textFieldRef = useRef<HTMLInputElement>(null);
 
-  const data = [];
+  const data = [
+    {
+      id: 1,
+      title: "Titulo1",
+      content: "Conteudo novo",
+    },
+    {
+      id: 1,
+      title: "Titulo1",
+      content: "Conteudo novo",
+    },
+  ];
 
   const clickItem = (e) => {
     if (e.target.parentElement.id || e.target.id) {
@@ -45,7 +56,7 @@ export default function Home() {
             <h2>Todas as Notas</h2>
             <Container>
               <SubTitle>{`${data.length} Notas`}</SubTitle>
-              <Button>New</Button>
+              <Button onClick={() => alert("")}>New</Button>
             </Container>
           </Header>
           <Container column scroll>
