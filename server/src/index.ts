@@ -10,3 +10,5 @@ const server = new ApolloServer({
 });
 
 server.listen();
+
+export default server;
