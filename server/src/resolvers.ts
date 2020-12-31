@@ -7,7 +7,11 @@ const resolvers: IResolvers = {
   Query: {
     notes: async () => {
       const main = async () => {
-        return await prisma.notes.findMany();
+        return await prisma.notes.findMany({
+          orderBy: {
+            id: "desc",
+          },
+        });
       };
       return main()
         .catch((e) => {
