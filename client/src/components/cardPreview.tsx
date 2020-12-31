@@ -5,7 +5,7 @@ export default function CardPreview(props) {
     <Container active={props.status} id={props.id}>
       <Title>{props.title}</Title>
       <p>{props.content}</p>
-      <p>Last modified: 30/11/2020:11:01</p>
+      <p>Last modified: {props.lastModified}</p>
     </Container>
   );
 }
