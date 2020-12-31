@@ -22,7 +22,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/index.tsx"
+    "src/pages/index.tsx",
+    "src/styles/index.ts",
+    "src/styles/card.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+interface IContainer {
+  scroll?: boolean;
+  column?: boolean;
+}
+
+interface IText {
+  show: boolean;
+}
+
+interface IFloatButton {
+  show: boolean;
+  background: string;
+}
+
 const LeftBar = styled.div`
   height: 100vh;
   width: 30vw;
@@ -9,20 +23,20 @@ const LeftBar = styled.div`
 const RightBar = styled.div`
   height: 100vh;
   width: 70vw;
-  padding: 40px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
 `;
 
-const Container = styled.div`
+const Container = styled.div<IContainer>`
   display: flex;
-  flex-direction: ${(prosp) => (prosp.column ? "column" : "row")};
-  overflow: ${(props) => (props.scroll ? "auto" : "hidden")};
+  flex-direction: ${(props) => (props.column ? "column" : "row")};
+  overflow: ${(props) => (props.scroll ? "auto" : "auto")};
   width: 100%;
   height: ${(props) => (props.scroll ? "80vh" : "100%")};
+  scrollbar-base-color: aquamarine;
 `;
 
 const Header = styled.header`
   padding: 10px 20px 10px 20px;
-  border-bottom: 5px solid white;
   background-color: #13bbaf;
   color: white;
   height: 20vh;
@@ -50,7 +64,26 @@ const Button = styled.button`
   }
 `;
 
-const TextField = styled.input.attrs({ placeholder: "Title" })`
+const FloatButton = styled.button<IFloatButton>`
+  color: white;
+  background-color: ${(props) => props.background};
+  padding: 10px;
+  text-align: center;
+  font-weight: 900;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: fixed;
+  margin-top: 90vh;
+  margin-left: ${(props) => (props.background === "red" ? "64vw" : "59vw")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
+  transition: opacity 0.3s;
+  z-index: 2;
+`;
+
+const TextField = styled.input<IText>`
   height: 10vh;
   width: 100%;
   align-self: center;
@@ -61,6 +94,7 @@ const TextField = styled.input.attrs({ placeholder: "Title" })`
   color: #13bbaf;
   opacity: 0.5;
   font-weight: 900;
+  display: ${(props) => (props.show ? "inline-block" : "none")};
   ::placeholder {
     color: #13bbaf;
   }
@@ -69,8 +103,8 @@ const TextField = styled.input.attrs({ placeholder: "Title" })`
   }
 `;
 
-const TextArea = styled.textarea.attrs({ placeholder: "Empty" })`
-  height: 80vh;
+const TextArea = styled.textarea<IText>`
+  height: 88vh;
   border: none;
   outline: none;
   resize: none;
@@ -78,6 +112,7 @@ const TextArea = styled.textarea.attrs({ placeholder: "Empty" })`
   opacity: 0.5;
   font-weight: 700;
   font-size: 15px;
+  display: ${(props) => (props.show ? "inline-block" : "none")};
   ::placeholder {
     font-size: 40px;
     text-align: center;
@@ -96,6 +131,7 @@ export {
   TextArea,
   TextField,
   Button,
+  FloatButton,
   SubTitle,
   Header,
   Container,
