@@ -1,12 +1,25 @@
 version: '3'
 services: 
-  db:
-    image: postgres
-    environment: 
-      POSTGRES_DB: development
-      POSTGRES_PASSWORD: development
-      POSTGRES_USER: development
+  backend:
+    build: .
+    env_file: .env
     ports: 
-     - 5432:5432
+      - 4000:4000
+    networks: 
+      - local
+    volumes: 
+      - .:/usr/app/server
+
+  postgres:
+    image: postgres
+    ports: 
+      - 5432:5432
     volumes:
      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    env_file: .env
+    networks: 
+      - local
+
+networks: 
+  local:
+    driver: bridge
