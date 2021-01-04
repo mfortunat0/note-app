@@ -1,0 +1,22 @@
+type Note{
+    id: ID
+    title: String
+    content: String
+    createdat: String
+    updatedat: String
+}
+
+input inputNote{
+    title: String
+    content: String
+}
+
+type Query{
+    notes: [Note]
+}
+
+type Mutation{
+    createNote(note: inputNote): Note
+    updateNote(id:ID, note: inputNote): Note
+    deleteNote(id: ID): Note
+}
