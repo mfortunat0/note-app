@@ -32,7 +32,7 @@ export default function Home() {
     uri: "http://localhost:4000/graphql",
   });
 
-  const getData = async () => {
+  const getNotes = async () => {
     const {
       data: { notes },
     } = await client.query({
@@ -58,7 +58,7 @@ export default function Home() {
     } = await client.mutate({
       mutation: gql`
         mutation {
-          createNote(note: { title: "New document", content: "Content" }) {
+          createNote(note: { title: "New document", content: "Empty" }) {
             title
             content
             id
@@ -66,7 +66,7 @@ export default function Home() {
         }
       `,
     });
-    getData();
+    getNotes();
     setCardActive(id);
     textFieldRef.current.value = title;
     textAreaRef.current.value = content;
@@ -84,7 +84,7 @@ export default function Home() {
         }
       `,
     });
-    getData();
+    getNotes();
   };
 
   const deleteNote = async (id: number) => {
@@ -98,12 +98,12 @@ export default function Home() {
         }
       `,
     });
-    getData();
+    getNotes();
     setInputShow(false);
   };
 
   useEffect(() => {
-    getData();
+    getNotes();
   }, []);
 
   const changeFields = (e) => {
@@ -115,7 +115,21 @@ export default function Home() {
     setInputShow(true);
   };
 
-  const clickItem = (e) => {
+  const clickNewItem = () => {
+    if (inputChanged) {
+      if (confirm("Do you really want to get off that note without saving?")) {
+        newNoteHandle();
+        setInputChanged(false);
+      } else {
+        updateNote(textFieldRef.current.value, textAreaRef.current.value);
+        newNoteHandle();
+        setInputChanged(false);
+      }
+    } else {
+      newNoteHandle();
+    }
+  };
+  const clickCardItem = (e) => {
     if (e.target.parentElement.id || e.target.id) {
       if (inputChanged) {
         if (
@@ -146,12 +160,12 @@ export default function Home() {
         />
       </Head>
       <Container>
-        <LeftBar onClick={clickItem}>
+        <LeftBar onClick={clickCardItem}>
           <Header>
             <h2>Todas as Notas</h2>
             <Container>
               <SubTitle>{`${data.length} Notas`}</SubTitle>
-              <Button onClick={newNoteHandle}>New</Button>
+              <Button onClick={clickNewItem}>New</Button>
             </Container>
           </Header>
           <Container column scroll>
