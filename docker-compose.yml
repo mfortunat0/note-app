@@ -1,0 +1,30 @@
+version: '3'
+services: 
+  backend:
+    build: ./server
+    env_file: .env.sample
+    ports: 
+      - 4000:4000
+    networks: 
+      - local
+
+  postgres:
+    image: postgres
+    ports: 
+      - 5432:5432
+    volumes:
+     - ./server/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    env_file: .env.sample
+    networks: 
+      - local
+
+  frontend:
+    build: ./client
+    ports: 
+      - 3000:3000
+    networks: 
+      - local
+
+networks: 
+  local:
+    driver: bridge
