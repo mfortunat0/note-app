@@ -1,7 +1,7 @@
 FROM node
 WORKDIR /usr/app/server
 COPY package.json yarn.lock ./
-RUN yarn
+RUN yarn 
 COPY . .
-RUN yarn prisma generate
-CMD ["yarn","dev"]
+RUN yarn prisma generate && yarn build
+CMD ["yarn","start"]
