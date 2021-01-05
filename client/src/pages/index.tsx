@@ -58,7 +58,7 @@ export default function Home() {
     } = await client.mutate({
       mutation: gql`
         mutation {
-          createNote(note: { title: "New document", content: "Empty" }) {
+          createNote(note: { title: "New Document", content: "Empty" }) {
             title
             content
             id
@@ -74,8 +74,9 @@ export default function Home() {
   };
 
   const updateNote = async (title: string, content: string) => {
-    await client.mutate({
-      mutation: gql`
+    if (title.length > 0 && content.length > 0) {
+      await client.mutate({
+        mutation: gql`
         mutation {
           updateNote(id: ${cardActive}, note: { title: "${title}", content: """${content}""" }) {
             title
@@ -83,8 +84,16 @@ export default function Home() {
           }
         }
       `,
-    });
-    getNotes();
+      });
+      getNotes();
+    } else {
+      alert("Campos em branco, preencha os campos");
+      const { title, content } = data[
+        data.findIndex((value) => value.id === cardActive)
+      ];
+      textFieldRef.current.value = title;
+      textAreaRef.current.value = content;
+    }
   };
 
   const deleteNote = async (id: number) => {
@@ -162,9 +171,9 @@ export default function Home() {
       <Container>
         <LeftBar onClick={clickCardItem}>
           <Header>
-            <h2>Todas as Notas</h2>
+            <h2>All notes</h2>
             <Container>
-              <SubTitle>{`${data.length} Notas`}</SubTitle>
+              <SubTitle>{`${data.length} Notes`}</SubTitle>
               <Button onClick={clickNewItem}>New</Button>
             </Container>
           </Header>
