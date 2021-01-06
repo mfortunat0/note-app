@@ -1,4 +1,4 @@
-<h1 align=center>📝 Note App<h1>
+<h1 align=center>📝 Note App</h1>
 <h4 align=center>An app to save your notes</h4>
 <h4 align=center>Made with: <br> 
 <a href="https://nextjs.org/">Nextjs</a> client side, <a href="https://nodejs.org/">Nodejs</a> + <a href="https://www.typescriptlang.org/">Typescript</a> + <a href="https://graphql.org/">Graphql</a> server side</h4>
