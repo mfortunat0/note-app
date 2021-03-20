@@ -10,6 +10,7 @@ import {
   LeftBar,
   Button,
   FloatButton,
+  FloatButtonContainer,
 } from "../styles/index";
 import CardPreview from "../components/cardPreview";
 import { useState, useRef, useEffect } from "react";
@@ -173,8 +174,8 @@ export default function Home() {
           <Header>
             <h2>All notes</h2>
             <Container>
+              <Button onClick={clickNewItem}>Create New Note</Button>
               <SubTitle>{`${data.length} Notes`}</SubTitle>
-              <Button onClick={clickNewItem}>New</Button>
             </Container>
           </Header>
           <Container column scroll>
@@ -195,25 +196,6 @@ export default function Home() {
           </Container>
         </LeftBar>
         <RightBar>
-          <FloatButton
-            background={"#13bbaf"}
-            show={inputChanged}
-            onClick={() => {
-              updateNote(textFieldRef.current.value, textAreaRef.current.value);
-              setInputChanged(false);
-            }}
-          >
-            Save
-          </FloatButton>
-          <FloatButton
-            background={"red"}
-            show={cardActive}
-            onClick={() => {
-              deleteNote(cardActive);
-            }}
-          >
-            Delete
-          </FloatButton>
           <Container column>
             <TextField
               onChange={() => setInputChanged(true)}
@@ -225,6 +207,28 @@ export default function Home() {
               show={inputsShow}
               ref={textAreaRef}
             />
+            <FloatButtonContainer>
+              <FloatButton
+                show={inputChanged}
+                onClick={() => {
+                  updateNote(
+                    textFieldRef.current.value,
+                    textAreaRef.current.value
+                  );
+                  setInputChanged(false);
+                }}
+              >
+                Save
+              </FloatButton>
+              <FloatButton
+                show={cardActive}
+                onClick={() => {
+                  deleteNote(cardActive);
+                }}
+              >
+                Delete
+              </FloatButton>
+            </FloatButtonContainer>
           </Container>
         </RightBar>
       </Container>

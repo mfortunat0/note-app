@@ -11,7 +11,6 @@ interface IText {
 
 interface IFloatButton {
   show: boolean;
-  background: string;
 }
 
 const LeftBar = styled.div`
@@ -32,12 +31,17 @@ const Container = styled.div<IContainer>`
   overflow: ${(props) => (props.scroll ? "auto" : "auto")};
   width: 100%;
   height: ${(props) => (props.scroll ? "80vh" : "100%")};
-  scrollbar-base-color: aquamarine;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.dark};
+  }
 `;
 
 const Header = styled.header`
   padding: 10px 20px 10px 20px;
-  background-color: #13bbaf;
+  background-color: ${(props) => props.theme.dark};
   color: white;
   height: 20vh;
 `;
@@ -49,16 +53,16 @@ const SubTitle = styled.p`
 `;
 
 const Button = styled.button`
-  color: #13bbaf;
-  background-color: white;
+  color: ${(props) => props.theme.softWhite};
+  background-color: ${(props) => props.theme.purple};
   font-weight: 900;
   border: 2px solid transparent;
   transition: all 0.3s;
-  border-radius: 50%;
+  border-radius: 4px;
   outline: none;
   height: 5vh;
   cursor: pointer;
-  :hover& {
+  &:hover {
     background-color: transparent;
     color: white;
   }
@@ -66,7 +70,7 @@ const Button = styled.button`
 
 const FloatButton = styled.button<IFloatButton>`
   color: white;
-  background-color: ${(props) => props.background};
+  background-color: ${(props) => props.theme.purple};
   padding: 10px;
   text-align: center;
   font-weight: 900;
@@ -75,12 +79,19 @@ const FloatButton = styled.button<IFloatButton>`
   border-radius: 3px;
   outline: none;
   cursor: pointer;
-  position: fixed;
-  margin-top: 90vh;
-  margin-left: ${(props) => (props.background === "red" ? "64vw" : "59vw")};
-  opacity: ${(props) => (props.show ? "1" : "0")};
-  transition: opacity 0.3s;
+  margin: 0 0.5vw 0 0.5vw;
+  display: ${(props) => (props.show ? "block" : "none")};
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out;
   z-index: 2;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const FloatButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const TextField = styled.input<IText>`
@@ -91,20 +102,19 @@ const TextField = styled.input<IText>`
   font-size: 40px;
   border: none;
   outline: none;
-  color: #13bbaf;
+  color: ${(props) => props.theme.black};
   opacity: 0.5;
   font-weight: 900;
+  background-color: transparent;
   display: ${(props) => (props.show ? "inline-block" : "none")};
-  ::placeholder {
-    color: #13bbaf;
-  }
-  :focus {
+  transition: opacity 0.3s ease-in-out;
+  &:focus {
     opacity: 1;
   }
 `;
 
 const TextArea = styled.textarea<IText>`
-  height: 88vh;
+  height: 80vh;
   border: none;
   outline: none;
   resize: none;
@@ -112,17 +122,16 @@ const TextArea = styled.textarea<IText>`
   opacity: 0.5;
   font-weight: 700;
   font-size: 15px;
+  background-color: transparent;
   display: ${(props) => (props.show ? "inline-block" : "none")};
-  ::placeholder {
+  color: ${(props) => props.theme.black};
+  transition: opacity 0.3s ease-in-out;
+  &::placeholder {
     font-size: 40px;
     text-align: center;
     padding: 5vh;
   }
-  ::selection {
-    background-color: #13bbaf;
-    color: white;
-  }
-  :focus {
+  &:focus {
     opacity: 1;
   }
 `;
@@ -132,6 +141,7 @@ export {
   TextField,
   Button,
   FloatButton,
+  FloatButtonContainer,
   SubTitle,
   Header,
   Container,

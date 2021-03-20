@@ -1,12 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const Global = createGlobalStyle`
   html,
   body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #f1f1f1;
   }
 
   a {
@@ -20,11 +19,20 @@ const Global = createGlobalStyle`
   }
 `;
 
+const Theme = {
+  softWhite: "#f1f1f1",
+  purple: "#8d27f5",
+  dark: "#303841",
+  black: "#3a4750",
+};
+
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Component {...pageProps} />
-      <Global />
+      <ThemeProvider theme={Theme}>
+        <Component {...pageProps} />
+        <Global />
+      </ThemeProvider>
     </>
   );
 }

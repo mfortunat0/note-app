@@ -1,9 +1,17 @@
 <h1 align=center>📝 Note App</h1>
 <h4 align=center>An app to save your notes</h4>
 <h4 align=center>Made with: <br> 
+
 <a href="https://nextjs.org/">Nextjs</a> client side, <a href="https://nodejs.org/">Nodejs</a> + <a href="https://www.typescriptlang.org/">Typescript</a> + <a href="https://graphql.org/">Graphql</a> server side</h4>
-<h3>Requirements:</h3>
-<h5><a href="https://docs.docker.com/get-docker/">Docker</a> & <a href="https://docs.docker.com/compose/install/">Docker Compose</a></h5>
+
+<br/>
+
+<img src="./.github/preview.png">
+
+<br/>
+
+<h3 align=center>Requirements:</h3>
+<h5 align=center><a href="https://docs.docker.com/get-docker/">Docker</a> & <a href="https://docs.docker.com/compose/install/">Docker Compose</a></h5>
 
 <br>
 

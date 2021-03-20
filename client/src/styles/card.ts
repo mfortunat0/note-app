@@ -6,20 +6,24 @@ interface IContainer {
 
 const Title = styled.p`
   font-weight: 900;
+  color: ${(props) => props.theme.softWhite};
+`;
+
+const Text = styled.p`
+  color: ${(props) => props.theme.softWhite};
 `;
 
 const Container = styled.div<IContainer>`
   width: 100%;
   padding: 10px 20px 10px 20px;
   cursor: pointer;
-  border-bottom: 2px solid #13bbaf;
   transition: all 0.2s;
-  background-color: ${(props) => (props.active ? "#13BBAF" : "transparent")};
+  background-color: ${(props) => props.theme.black};
   color: ${(props) => (props.active ? "white" : "#555")};
   :hover {
-    background-color: #13bbaf;
+    background-color: ${(props) => props.theme.dark};
     color: white;
   }
 `;
 
-export { Title, Container };
+export { Title, Container, Text };
